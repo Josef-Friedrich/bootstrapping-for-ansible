@@ -1,5 +1,5 @@
 # bootstrapping-for-ansible
 
 ```
-wget url -O - | sh
+wget https://git.io/vHXIB -O - | sh
 ```
