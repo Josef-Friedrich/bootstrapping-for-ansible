@@ -1,7 +1,7 @@
 #! /bin/sh
 
-# Short URL: https://git.io/vHXJx
+# Short URL: https://git.io/vHXIB
 
-# Run with: wget -O - | sh
+# Run with: wget https://git.io/vHXIB -O - | sh
 
 echo lol
