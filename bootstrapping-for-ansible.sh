@@ -4,12 +4,19 @@
 
 # Run with: wget https://git.io/vHXIB -O - | sh
 
-DISTRO=$(lsb_release -si)
+if [ -f /etc/os-release ]; then
+  . /etc/os-release
+fi
+
 SERVICE=sshd
 
-if [ "$DISTRO" = 'Ubuntu' ]; then
+if [ "$ID_LIKE" = 'debian' ]; then
   apt install openssh-server
   SERVICE=ssh
+fi
+
+if [ "$ID_LIKE" = 'arch' ]; then
+  pacman -S openssh
 fi
 
 cp /etc/ssh/sshd_config /etc/ssh/sshd_config.bak_$(date +%s)
@@ -23,5 +30,3 @@ EOF
 
 systemctl start "$SERVICE".service
 systemctl enable "$SERVICE".service
-
-echo lol
