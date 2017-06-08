@@ -12,7 +12,10 @@ if [ "$DISTRO" = 'Ubuntu' ]; then
   SERVICE=ssh
 fi
 
-cat << EOF >> /etc/ssh/sshd_conf
+cp /etc/ssh/sshd_config /etc/ssh/sshd_config.bak_$(date +%s)
+
+cat << EOF >> /etc/ssh/sshd_config
+# Added by bootstrapping-for-ansible.sh
 PermitRootLogin yes
 PubkeyAuthentication yes
 PasswordAuthentication yes
