@@ -11,12 +11,12 @@ fi
 SERVICE=sshd
 
 if [ "$ID_LIKE" = 'debian' ]; then
-  apt install openssh-server
+  apt install -y openssh-server
   SERVICE=ssh
 fi
 
 if [ "$ID_LIKE" = 'arch' ]; then
-  pacman -S openssh
+  pacman --noconfirm -S openssh
 fi
 
 cp /etc/ssh/sshd_config /etc/ssh/sshd_config.bak_$(date +%s)
