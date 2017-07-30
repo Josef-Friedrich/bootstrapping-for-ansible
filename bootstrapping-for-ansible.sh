@@ -28,5 +28,9 @@ PubkeyAuthentication yes
 PasswordAuthentication yes
 EOF
 
-systemctl start "$SERVICE".service
+systemctl restart "$SERVICE".service
 systemctl enable "$SERVICE".service
+
+IP=$(hostname -I | awk '{print $1}')
+
+echo "Login: ssh $USER@$IP"
