@@ -11,25 +11,25 @@ fi
 SERVICE=sshd
 
 if [ "$ID_LIKE" = 'debian' ]; then
-  apt install -y openssh-server
+  sudo apt install -y openssh-server
   SERVICE=ssh
 fi
 
 if [ "$ID_LIKE" = 'arch' ]; then
-  pacman --noconfirm -S openssh
+  sudo pacman --noconfirm -S openssh
 fi
 
-cp /etc/ssh/sshd_config /etc/ssh/sshd_config.bak_$(date +%s)
+sudo cp /etc/ssh/sshd_config /etc/ssh/sshd_config.bak_$(date +%s)
 
-cat << EOF >> /etc/ssh/sshd_config
+sudo cat << EOF >> /etc/ssh/sshd_config
 # Added by bootstrapping-for-ansible.sh
 PermitRootLogin yes
 PubkeyAuthentication yes
 PasswordAuthentication yes
 EOF
 
-systemctl restart "$SERVICE".service
-systemctl enable "$SERVICE".service
+sudo systemctl restart "$SERVICE".service
+sudo systemctl enable "$SERVICE".service
 
 IP=$(hostname -I | awk '{print $1}')
 
