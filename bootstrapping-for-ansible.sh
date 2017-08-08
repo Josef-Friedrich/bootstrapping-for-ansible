@@ -33,4 +33,17 @@ sudo systemctl enable "$SERVICE".service
 
 IP=$(hostname -I | awk '{print $1}')
 
+KEYS='ssh_host_ecdsa_key
+ssh_host_ecdsa_key.pub
+ssh_host_ed25519_key
+ssh_host_ed25519_key.pub
+ssh_host_rsa_key
+ssh_host_rsa_key.pub'
+
+for KEY in $KEYS; do
+  if [ ! -f /etc/ssh/$KEY ]; then
+    echo "Key file doesn’t exist: /etc/ssh/$KEY"
+  fi
+done
+
 echo "Login: ssh $USER@$IP"
