@@ -21,7 +21,7 @@ fi
 
 sudo cp /etc/ssh/sshd_config /etc/ssh/sshd_config.bak_$(date +%s)
 
-sudo cat << EOF >> /etc/ssh/sshd_config
+sudo cat << EOF | sudo tee -a /etc/ssh/sshd_config
 # Added by bootstrapping-for-ansible.sh
 PermitRootLogin yes
 PubkeyAuthentication yes
