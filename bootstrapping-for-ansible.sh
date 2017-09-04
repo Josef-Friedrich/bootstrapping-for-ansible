@@ -31,6 +31,11 @@ EOF
 sudo systemctl restart "$SERVICE".service
 sudo systemctl enable "$SERVICE".service
 
+if grep root:!: /etc/shadow > /dev/null 2>&1 ; then
+  echo "Your root account has no password! Enter one:"
+  sudo passwd root
+fi
+
 IP=$(hostname -I | awk '{print $1}')
 
 KEYS='ssh_host_ecdsa_key
