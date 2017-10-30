@@ -12,11 +12,13 @@ SERVICE=sshd
 
 if [ "$ID_LIKE" = 'debian' ]; then
   sudo apt install -y openssh-server
+  sudo apt install -y python
   SERVICE=ssh
 fi
 
 if [ "$ID_LIKE" = 'arch' ]; then
   sudo pacman --noconfirm -S openssh
+  sudo pacman --noconfirm -S python
 fi
 
 sudo cp /etc/ssh/sshd_config /etc/ssh/sshd_config.bak_$(date +%s)
@@ -52,3 +54,4 @@ for KEY in $KEYS; do
 done
 
 echo "Login: ssh $USER@$IP"
+echo "Set password for “root”: sudo passwd root"
